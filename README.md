@@ -8,7 +8,7 @@ This repository is intentionally published as a **PoC snapshot**, not as a polis
 
 ## What this PoC contains
 
-The repository contains the core files from the original implementation:
+The repository contains the files from the original implementation:
 
 ```txt
 app/api/tg-auth/route.ts       # validates Telegram initData and issues signed session cookies
@@ -83,19 +83,6 @@ Telegram initData validation + signed session + nonce launch flow
 The expected business impact is reduced dependence on external security/API gateway services. Depending on the hosting provider, traffic, and security stack, this may save approximately **$100–200/month** in infrastructure costs.
 
 
-It does not include every dependency from the original application. In particular, the following parts are referenced by the code but intentionally not included in this PoC snapshot:
-
-```txt
-@/lib/supabase-admin
-@/lib/tg-session
-/api/nonce/issue
-/api/me
-Supabase schema/migrations
-full Mini App page
-production deployment config
-```
-
-Those files belong to the host application and should be reviewed, sanitized, and published separately if this PoC is expanded into a complete starter kit.
 
 ## Required environment variables
 
