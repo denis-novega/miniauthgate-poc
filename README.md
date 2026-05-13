@@ -82,9 +82,6 @@ Telegram initData validation + signed session + nonce launch flow
 
 The expected business impact is reduced dependence on external security/API gateway services. Depending on the hosting provider, traffic, and security stack, this may save approximately **$100–200/month** in infrastructure costs.
 
-## What this repository is not
-
-This repository is **not** a drop-in production package.
 
 It does not include every dependency from the original application. In particular, the following parts are referenced by the code but intentionally not included in this PoC snapshot:
 
@@ -113,26 +110,3 @@ NEXT_PUBLIC_BASE_URL=
 
 Do not commit real secrets.
 
-## Current implementation notes
-
-`MiniAuthGate.tsx` currently fetches `/api/me` and stores the result in `authed`, but the component does not yet block children when `authed === false`. This was kept unchanged from the original code snapshot. For a stricter gate, add an unauthenticated branch before rendering `children`.
-
-## Suggested next steps
-
-To turn this PoC into a complete open-source starter kit, add:
-
-- `lib/tg-session.ts` with signed session creation and verification.
-- `lib/supabase-admin.ts` with a sanitized Supabase admin client.
-- `app/api/me/route.ts` for session verification.
-- `app/api/nonce/issue/route.ts` for nonce creation.
-- SQL migrations for `profiles` and nonce storage.
-- A minimal Mini App page that sends Telegram `initData` to `/api/tg-auth`.
-- Tests for invalid `initData`, expired `initData`, invalid cookies, and replayed nonce.
-
-## Positioning
-
-A careful public claim for this project:
-
-> A proof-of-concept serverless authentication gateway for Telegram Mini Apps, combining Telegram `initData` validation, signed `HttpOnly` sessions, and one-time nonce launch links.
-
-Avoid claiming “first in Russia” unless there is a stronger public evidence trail comparing this implementation with other Russian-language or Russia-based open-source projects.
